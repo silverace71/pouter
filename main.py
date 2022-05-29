@@ -161,8 +161,8 @@ if __name__ == '__main__':
     print("Welcome to pouter setup")
     if prompt_sudo():
         print("sudo privileges to setup have been given")
-        runnn("sudo apt install iptables -y")
-        runnn("sudo apt install unbound -y")
+        runnn("sudo apt install -y iptables")
+        runnn("sudo apt install -y unbound")
         
         wlan0_ipv4_addr=input("static ip on parent network")
         wlan0_ipv4_subnet=input("subnet mask on parent network (24 for 255.255.255.0)")
@@ -180,7 +180,7 @@ if __name__ == '__main__':
         runnn_bash("sudo iptables -t nat -A POSTROUTING -o wlan0 -j MASQUERADE")
         runnn_bash("sudo sh -c \"echo 1 > /proc/sys/net/ipv4/ip_forward\"")
         runnn_bash("sudo sh -c \"echo \"net.ipv4.ip_forward=1\" > /etc/sysctl.conf\"")
-        runnn_bash("sudo apt install iptables-persistent")
+        runnn_bash("sudo apt install -y iptables-persistent")
         for i in 10:
             print("PLEASE RESTART YOUR COMPUTOOOOR",end=" ")
 
