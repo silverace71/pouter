@@ -141,10 +141,7 @@ def install_pi_hole(wlan0_ipv4_addr, wlan0_ipv4_subnet, eth0_ipv4_dhcp_start_add
     runnn("mkdir -p /etc/pihole/")
     with open("/etc/pihole/setupVars.conf","w") as f:
         f.write(conf)
-    args = ["bash","-c","curl -L https://install.pi-hole.net | bash /dev/stdin --unattended"]
-    kwargs = dict(stdout=subprocess.PIPE,
-                encoding="ascii")
-    cmd = subprocess.run(args)
+    subprocess.call('./ipy.sh')
 
     args = ["pihole","-a","-p",password]
     kwargs = dict(stdout=subprocess.PIPE,
@@ -176,14 +173,9 @@ if __name__ == '__main__':
         base[-1]="0"
         base=".".join(base)
         runnn_bash(f"sudo iptables -A FORWARD -o wlan0 -i eth0 -s {base}/24 -m conntrack --ctstate NEW -j ACCEPT")
-        runnn_bash("sudo iptables -A FORWARD -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT")
-        runnn_bash("sudo iptables -t nat -F POSTROUTING")
-        runnn_bash("sudo iptables -t nat -A POSTROUTING -o wlan0 -j MASQUERADE")
-        runnn_bash("sudo sh -c \"echo 1 > /proc/sys/net/ipv4/ip_forward\"")
-        runnn_bash("sudo sh -c \"echo \"net.ipv4.ip_forward=1\" > /etc/sysctl.conf\"")
-        runnn_bash("sudo apt install -y iptables-persistent")
-        runnn_bash("iptables-save >/etc/iptables/rules.v4")
-        runnn_bash("ip6tables-save >/etc/iptables/rules.v6")
+        
+        subprocess.call('./ipy2.sh')
+        
         for i in 10:
             print("PLEASE RESTART YOUR COMPUTOOOOR",end=" ")
 
