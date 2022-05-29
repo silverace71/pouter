@@ -163,7 +163,6 @@ if __name__ == '__main__':
     if prompt_sudo():
         print("sudo privileges to setup have been given")
         runnn("sudo apt install -y iptables")
-        runnn("sudo apt install -y unbound")
         
         wlan0_ipv4_addr=input("\u001b[34mstatic ip on parent network >> \u001b[0m")
         wlan0_ipv4_subnet=input("\u001b[34msubnet mask on parent network (24 for 255.255.255.0) >> \u001b[0m")
@@ -172,6 +171,7 @@ if __name__ == '__main__':
         eth0_ipv4_dhcp_end_addr=input("\u001b[34mdhcp end ip on pouter network (eg. 10.0.0.169) >> \u001b[0m")
         paa = getpass("\u001b[31mpi-hole web admin password: >> \u001b[0m")
         install_pi_hole(wlan0_ipv4_addr, wlan0_ipv4_subnet, eth0_ipv4_dhcp_start_addr, eth0_ipv4_dhcp_end_addr, eth0_ipv4_addr, paa)
+        runnn("sudo apt install -y unbound")
         base=eth0_ipv4_addr.split(".")
         base[-1]="0"
         base=".".join(base)
