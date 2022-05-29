@@ -126,7 +126,7 @@ def runnn(stm, pwd=""):
     cmd = subprocess.run(args)
 
 def runnn_bash(stm, pwd=""):
-    args = ["bash","-C",stm]
+    args = ["bash","-c",stm]
     kwargs = dict(stdout=subprocess.PIPE,
                 encoding="ascii")
     pwd=""
@@ -141,7 +141,7 @@ def install_pi_hole(wlan0_ipv4_addr, wlan0_ipv4_subnet, eth0_ipv4_dhcp_start_add
     runnn("mkdir -p /etc/pihole/")
     with open("/etc/pihole/setupVars.conf","w") as f:
         f.write(conf)
-    args = ["bash","-C","curl -L https://install.pi-hole.net | bash /dev/stdin --unattended"]
+    args = ["bash","-c","curl -L https://install.pi-hole.net | bash /dev/stdin --unattended"]
     kwargs = dict(stdout=subprocess.PIPE,
                 encoding="ascii")
     cmd = subprocess.run(args)
