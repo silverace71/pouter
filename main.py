@@ -138,6 +138,7 @@ def runnn_bash(stm, pwd=""):
 def install_pi_hole(wlan0_ipv4_addr, wlan0_ipv4_subnet, eth0_ipv4_dhcp_start_addr, eth0_ipv4_dhcp_end_addr, eth0_ipv4_addr,password):
     conf=get_pi_hole_config(wlan0_ipv4_addr, wlan0_ipv4_subnet, eth0_ipv4_dhcp_start_addr, eth0_ipv4_dhcp_end_addr, eth0_ipv4_addr)
     runnn("rm -rf /etc/pihole/setupVars.conf")
+    runnn("mkdir -p /etc/pihole/setupVars.conf")
     with open("/etc/pihole/setupVars.conf","w") as f:
         f.write(conf)
     args = ["bash","-C","curl -L https://install.pi-hole.net | bash /dev/stdin --unattended"]
@@ -164,12 +165,12 @@ if __name__ == '__main__':
         runnn("sudo apt install -y iptables")
         runnn("sudo apt install -y unbound")
         
-        wlan0_ipv4_addr=input("static ip on parent network")
-        wlan0_ipv4_subnet=input("subnet mask on parent network (24 for 255.255.255.0)")
-        eth0_ipv4_addr=input("static ip on pouter network (eg. 10.0.0.1)")
-        eth0_ipv4_dhcp_start_addr=input("dhcp start ip on pouter network (eg. 10.0.0.10)")
-        eth0_ipv4_dhcp_end_addr=input("dhcp end ip on pouter network (eg. 10.0.0.100)")
-        paa = getpass("pi-hole web admin password: ")
+        wlan0_ipv4_addr=input("\u001b[34mstatic ip on parent network >> \u001b[0m")
+        wlan0_ipv4_subnet=input("\u001b[34msubnet mask on parent network (24 for 255.255.255.0) >> \u001b[0m")
+        eth0_ipv4_addr=input("\u001b[34mstatic ip on pouter network (eg. 10.0.0.1) >> \u001b[0m")
+        eth0_ipv4_dhcp_start_addr=input("\u001b[34mdhcp start ip on pouter network (eg. 10.0.0.12) >> \u001b[0m")
+        eth0_ipv4_dhcp_end_addr=input("\u001b[34mdhcp end ip on pouter network (eg. 10.0.0.169) >> \u001b[0m")
+        paa = getpass("\u001b[31mpi-hole web admin password: >> \u001b[0m")
         install_pi_hole(wlan0_ipv4_addr, wlan0_ipv4_subnet, eth0_ipv4_dhcp_start_addr, eth0_ipv4_dhcp_end_addr, eth0_ipv4_addr, paa)
         base=eth0_ipv4_addr.split(".")
         base[-1]="0"
