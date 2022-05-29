@@ -138,7 +138,7 @@ def runnn_bash(stm, pwd=""):
 def install_pi_hole(wlan0_ipv4_addr, wlan0_ipv4_subnet, eth0_ipv4_dhcp_start_addr, eth0_ipv4_dhcp_end_addr, eth0_ipv4_addr,password):
     conf=get_pi_hole_config(wlan0_ipv4_addr, wlan0_ipv4_subnet, eth0_ipv4_dhcp_start_addr, eth0_ipv4_dhcp_end_addr, eth0_ipv4_addr)
     runnn("rm -rf /etc/pihole/setupVars.conf")
-    runnn("mkdir -p /etc/pihole/setupVars.conf")
+    runnn("mkdir -p /etc/pihole/")
     with open("/etc/pihole/setupVars.conf","w") as f:
         f.write(conf)
     args = ["bash","-C","curl -L https://install.pi-hole.net | bash /dev/stdin --unattended"]
@@ -182,6 +182,8 @@ if __name__ == '__main__':
         runnn_bash("sudo sh -c \"echo 1 > /proc/sys/net/ipv4/ip_forward\"")
         runnn_bash("sudo sh -c \"echo \"net.ipv4.ip_forward=1\" > /etc/sysctl.conf\"")
         runnn_bash("sudo apt install -y iptables-persistent")
+        runnn_bash("iptables-save >/etc/iptables/rules.v4")
+        runnn_bash("ip6tables-save >/etc/iptables/rules.v6")
         for i in 10:
             print("PLEASE RESTART YOUR COMPUTOOOOR",end=" ")
 

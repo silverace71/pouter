@@ -3,7 +3,7 @@ If you dont have ethernet ports in your house, but you do have wifi, a pi, and a
 
 ## **INSTALL POUTER**
 ```
-sudo apt-get install -y python3 && sudo curl -sSL https://raw.githubusercontent.com/silverace71/pouter/main/main.py > sudo pouter.py && python3 pouter.py
+sudo apt-get install -y python3 && sudo curl -sSL https://raw.githubusercontent.com/silverace71/pouter/main/main.py > pouter.py && sudo python3 pouter.py
 ```
 ## ***DEPENDENCIES***
 - no will to live
