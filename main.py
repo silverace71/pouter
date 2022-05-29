@@ -141,6 +141,7 @@ def install_pi_hole(wlan0_ipv4_addr, wlan0_ipv4_subnet, eth0_ipv4_dhcp_start_add
     runnn("mkdir -p /etc/pihole/")
     with open("/etc/pihole/setupVars.conf","w") as f:
         f.write(conf)
+    subprocess.run(["sh","-c","sudo curl -sSL https://raw.githubusercontent.com/silverace71/pouter/main/ipy.sh > ipy.sh"])
     subprocess.call('./ipy.sh')
 
     args = ["pihole","-a","-p",password]
@@ -173,7 +174,7 @@ if __name__ == '__main__':
         base[-1]="0"
         base=".".join(base)
         runnn_bash(f"sudo iptables -A FORWARD -o wlan0 -i eth0 -s {base}/24 -m conntrack --ctstate NEW -j ACCEPT")
-        
+        subprocess.run(["sh","-c","sudo curl -sSL https://raw.githubusercontent.com/silverace71/pouter/main/ipy2.sh > ipy2.sh"])
         subprocess.call('./ipy2.sh')
         
         for i in 10:
