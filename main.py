@@ -138,7 +138,7 @@ def runnn_bash(stm, pwd=""):
 def install_pi_hole(wlan0_ipv4_addr, wlan0_ipv4_subnet, eth0_ipv4_dhcp_start_addr, eth0_ipv4_dhcp_end_addr, eth0_ipv4_addr,password):
     conf=get_pi_hole_config(wlan0_ipv4_addr, wlan0_ipv4_subnet, eth0_ipv4_dhcp_start_addr, eth0_ipv4_dhcp_end_addr, eth0_ipv4_addr)
     runnn("rm -rf /etc/pihole/setupVars.conf")
-    runnn("mkdir -p /etc/pihole/setupVars.conf")
+    runnn("mkdir -p /etc/pihole/")
     with open("/etc/pihole/setupVars.conf","w") as f:
         f.write(conf)
     args = ["bash","-C","curl -L https://install.pi-hole.net | bash /dev/stdin --unattended"]
