@@ -182,6 +182,8 @@ if __name__ == '__main__':
         runnn_bash("sudo sh -c \"echo 1 > /proc/sys/net/ipv4/ip_forward\"")
         runnn_bash("sudo sh -c \"echo \"net.ipv4.ip_forward=1\" > /etc/sysctl.conf\"")
         runnn_bash("sudo apt install -y iptables-persistent")
+        runnn_bash("iptables-save >/etc/iptables/rules.v4")
+        runnn_bash("ip6tables-save >/etc/iptables/rules.v6")
         for i in 10:
             print("PLEASE RESTART YOUR COMPUTOOOOR",end=" ")
 
