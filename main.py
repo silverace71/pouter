@@ -167,6 +167,7 @@ if __name__ == '__main__':
         subprocess.run(["sh","-c","sudo curl -sSL https://raw.githubusercontent.com/silverace71/pouter/main/ipy2.sh > ipy2.sh"])
         runnn("sudo apt install -y iptables")
         
+        wlan0_ipv4_router_addr=input("\u001b[36mgateway ip on parent network >> \u001b[0m")
         wlan0_ipv4_addr=input("\u001b[36mstatic ip on parent network >> \u001b[0m")
         wlan0_ipv4_subnet=input("\u001b[36msubnet mask on parent network (24 for 255.255.255.0) >> \u001b[0m")
         eth0_ipv4_addr=input("\u001b[36mstatic ip on pouter network (eg. 10.0.0.1) >> \u001b[0m")
@@ -193,6 +194,13 @@ if __name__ == '__main__':
         kwargs = dict(stdout=subprocess.PIPE,
                     encoding="ascii")
         cmd = subprocess.run(args)
+        with open("/etc/dhcpcd.conf","a") as f:
+            f.write("""
+interface wlan0
+\tstatic ip_address={wlan0_ipv4_addr}/{wlan0_ipv4_subnet}
+\tstatic routers={wlan0_ipv4_router_addr}
+\tstatic domain_name_server=
+""")
         
         for i in range(10):
             print("PLEASE RESTART YOUR COMPUTOOOOR",end=" ")
