@@ -189,7 +189,23 @@ if __name__ == '__main__':
         runnn("mkdir -p /etc/pihole/")
         with open("/etc/pihole/setupVars.conf","w") as f:
             f.write(conf)
+        with open("/etc/systemd/system/pouter.service","w") as f:
+            f.write(f"""[Unit]
+Description=pouter service
+After=network.target
+StartLimitIntervalSec=0
+[Service]
+Type=simple
+Restart=always
+RestartSec=1
+User=root
+ExecStart=/usr/bin/ip addr add {eth0_ipv4_addr}/24 dev eth0
 
+[Install]
+WantedBy=multi-user.target
+""")
+        runnn("sudo systemctl start pouter.service")
+        runnn("sudo systemctl enable pouter.service")
         args = ["pihole","-a","-p",paa]
         kwargs = dict(stdout=subprocess.PIPE,
                     encoding="ascii")
