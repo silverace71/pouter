@@ -141,7 +141,6 @@ def install_pi_hole(wlan0_ipv4_addr, wlan0_ipv4_subnet, eth0_ipv4_dhcp_start_add
     runnn("mkdir -p /etc/pihole/")
     with open("/etc/pihole/setupVars.conf","w") as f:
         f.write(conf)
-    subprocess.run(["sh","-c","sudo curl -sSL https://raw.githubusercontent.com/silverace71/pouter/main/ipy.sh > ipy.sh"])
     subprocess.run(['sudo',"chmod","+x","ipy.sh"])
     subprocess.run(['sudo','bash','./ipy.sh'])
 
@@ -161,6 +160,9 @@ if __name__ == '__main__':
     print("Welcome to pouter setup")
     if prompt_sudo():
         print("sudo privileges to setup have been given")
+            
+        subprocess.run(["sh","-c","sudo curl -sSL https://raw.githubusercontent.com/silverace71/pouter/main/ipy.sh > ipy.sh"])
+        subprocess.run(["sh","-c","sudo curl -sSL https://raw.githubusercontent.com/silverace71/pouter/main/ipy2.sh > ipy2.sh"])
         runnn("sudo apt install -y iptables")
         
         wlan0_ipv4_addr=input("\u001b[36mstatic ip on parent network >> \u001b[0m")
@@ -175,7 +177,7 @@ if __name__ == '__main__':
         base[-1]="0"
         base=".".join(base)
         runnn_bash(f"sudo iptables -A FORWARD -o wlan0 -i eth0 -s {base}/24 -m conntrack --ctstate NEW -j ACCEPT")
-        subprocess.run(["sh","-c","sudo curl -sSL https://raw.githubusercontent.com/silverace71/pouter/main/ipy2.sh > ipy2.sh"])
+        
         subprocess.run(['sudo',"chmod","+x","ipy2.sh"])
         subprocess.run(['sudo','bash','./ipy2.sh'])
         
