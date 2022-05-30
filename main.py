@@ -195,7 +195,7 @@ if __name__ == '__main__':
                     encoding="ascii")
         cmd = subprocess.run(args)
         with open("/etc/dhcpcd.conf","a") as f:
-            f.write("""
+            f.write(f"""
 interface wlan0
 \tstatic ip_address={wlan0_ipv4_addr}/{wlan0_ipv4_subnet}
 \tstatic routers={wlan0_ipv4_router_addr}
