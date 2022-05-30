@@ -188,8 +188,6 @@ if __name__ == '__main__':
         runnn("mkdir -p /etc/pihole/")
         with open("/etc/pihole/setupVars.conf","w") as f:
             f.write(conf)
-        subprocess.run(['sudo',"chmod","+x","ipy.sh"])
-        subprocess.run(['sudo','bash','./ipy.sh'])
 
         args = ["pihole","-a","-p",paa]
         kwargs = dict(stdout=subprocess.PIPE,
