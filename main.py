@@ -48,7 +48,8 @@ DHCP_IPv6=false
 DHCP_rapid_commit=false
 API_EXCLUDE_DOMAINS=
 API_EXCLUDE_CLIENTS=
-API_QUERY_LOG_SHOW=all"""
+API_QUERY_LOG_SHOW=all
+"""
 
 unbound_conf="""server:
     # If no logfile is specified, syslog is used
@@ -115,7 +116,8 @@ unbound_conf="""server:
     private-address: 172.16.0.0/12
     private-address: 10.0.0.0/8
     private-address: fd00::/8
-    private-address: fe80::/10"""
+    private-address: fe80::/10
+"""
 def runnn(stm, pwd=""):
     args = stm.split()
     kwargs = dict(stdout=subprocess.PIPE,
