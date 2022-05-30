@@ -17,7 +17,7 @@ def test_sudo(pwd=""):
 def prompt_sudo():
     ok = is_root() or test_sudo()
     return ok
-def get_pi_hole_config(wlan0_ipv4_addr,wlan0_ipv4_subnet,eth0_ipv4_dhcp_start_addr,eth0_ipv4_dhcp_end_addr,eth0_ipv4_addr):
+def get_pi_hole_config(wlan0_ipv4_addr,wlan0_ipv4_subnet,eth0_ipv4_dhcp_start_addr,eth0_ipv4_dhcp_end_addr,eth0_ipv4_addr,dns):
     return f"""QUERY_LOGGING=true
 PIHOLE_INTERFACE=wlan0
 IPV4_ADDRESS={wlan0_ipv4_addr}/{wlan0_ipv4_subnet}
@@ -35,7 +35,7 @@ BLOCKING_ENABLED=true
 ADMIN_EMAIL=
 WEBUIBOXEDLAYOUT=boxed
 WEBTHEME=default-darker
-PIHOLE_DNS_1=127.0.0.1#5335
+PIHOLE_DNS_1={dns}
 DNSSEC=false
 REV_SERVER=false
 DHCP_ACTIVE=true
@@ -136,7 +136,7 @@ def runnn_bash(stm, pwd=""):
 
 
 def install_pi_hole(wlan0_ipv4_addr, wlan0_ipv4_subnet, eth0_ipv4_dhcp_start_addr, eth0_ipv4_dhcp_end_addr, eth0_ipv4_addr,password):
-    conf=get_pi_hole_config(wlan0_ipv4_addr, wlan0_ipv4_subnet, eth0_ipv4_dhcp_start_addr, eth0_ipv4_dhcp_end_addr, eth0_ipv4_addr)
+    conf=get_pi_hole_config(wlan0_ipv4_addr, wlan0_ipv4_subnet, eth0_ipv4_dhcp_start_addr, eth0_ipv4_dhcp_end_addr, eth0_ipv4_addr,"1.1.1.1")
     runnn("rm -rf /etc/pihole/setupVars.conf")
     runnn("mkdir -p /etc/pihole/")
     with open("/etc/pihole/setupVars.conf","w") as f:
@@ -180,8 +180,21 @@ if __name__ == '__main__':
         
         subprocess.run(['sudo',"chmod","+x","ipy2.sh"])
         subprocess.run(['sudo','bash','./ipy2.sh'])
+
+        conf=get_pi_hole_config(wlan0_ipv4_addr, wlan0_ipv4_subnet, eth0_ipv4_dhcp_start_addr, eth0_ipv4_dhcp_end_addr, eth0_ipv4_addr,"127.0.0.1#5335")
+        runnn("rm -rf /etc/pihole/setupVars.conf")
+        runnn("mkdir -p /etc/pihole/")
+        with open("/etc/pihole/setupVars.conf","w") as f:
+            f.write(conf)
+        subprocess.run(['sudo',"chmod","+x","ipy.sh"])
+        subprocess.run(['sudo','bash','./ipy.sh'])
+
+        args = ["pihole","-a","-p",paa]
+        kwargs = dict(stdout=subprocess.PIPE,
+                    encoding="ascii")
+        cmd = subprocess.run(args)
         
-        for i in 10:
+        for i in range(10):
             print("PLEASE RESTART YOUR COMPUTOOOOR",end=" ")
 
     else:
