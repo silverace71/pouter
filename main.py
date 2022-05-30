@@ -199,7 +199,7 @@ if __name__ == '__main__':
 interface wlan0
 \tstatic ip_address={wlan0_ipv4_addr}/{wlan0_ipv4_subnet}
 \tstatic routers={wlan0_ipv4_router_addr}
-\tstatic domain_name_server=
+\tstatic domain_name_servers=
 """)
         
         for i in range(10):
