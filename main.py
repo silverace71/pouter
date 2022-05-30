@@ -205,7 +205,7 @@ interface wlan0
 """)
         
         for i in range(10):
-            print("PLEASE RESTART YOUR COMPUTOOOOR",end=" ")
+            print("SUCSSES",end=" ")
 
     else:
         print("pouter needs sudo privileges to setup")
