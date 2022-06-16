@@ -17,7 +17,7 @@ sudo apt-get install -y python3 && sudo curl -sSL https://raw.githubusercontent.
 ---
 ## **WARNINGS**
 - DO NOT RUN THIS SCRIPT MORE THAN ONCE
-- MAKE SURE ```/etc/dhcpcd.conf``` has not been touched before. If you have already configured anything already, please delet anything you added.
+- MAKE SURE ```/etc/dhcpcd.conf``` has not been touched before. If you have already configured anything already, please delete anything you added.
 ---
 ## ***DEPENDENCIES***
 - a problem
