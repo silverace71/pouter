@@ -1,13 +1,13 @@
 # pouter
-If you dont have ethernet ports in your house, but you do have wifi, a debian based system, and a network switch. This gives you internet access to the ethernet ports on your switch, and built in ad blocking through pi-hole! (and a subnet).
+If you want to have your own network seperate from your main network (this is great for testing), and you want everything to be connected via ethernet, but you don't have any ethernet ports in your house. This is for you
 
 ## **HOW DOES IT WORK?**
 - it checks for python3
 - you configure it
-- pi-hole installs (this also blocks ads network wide!)
-- unbound installs
+- pi-hole installs (this blocks ads on the network, and it also acts as a dhcpv4 ip giver. Kinda like your router)
+- unbound installs(your very own dns so that people cannot track you)
 - *magic*
-- (OPTIONAL): Reboot the system you are using
+- Reboot the system you are using
 ---
 
 ## **INSTALL POUTER**
@@ -21,8 +21,8 @@ sudo apt-get install -y python3 && sudo curl -sSL https://raw.githubusercontent.
 ---
 ## ***DEPENDENCIES***
 - a problem
-- an up to date debian system
-- a network switch
+- an up to date system with apt package manager on it
+- a network switch (optional)
 - python (included with the script)
 - sudo permisions 
 ---
