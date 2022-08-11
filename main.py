@@ -156,7 +156,7 @@ if __name__ == '__main__':
         wlan0_ipv4_router_addr=input("\u001b[36mgateway ip on parent network >> \u001b[0m")
         wlan0_ipv4_addr=input("\u001b[36mstatic ip on parent network >> \u001b[0m")
         wlan0_ipv4_subnet=input("\u001b[36msubnet mask on parent network (24 for 255.255.255.0) >> \u001b[0m")
-        eth0_ipv4_addr=input("\u001b[36mstatic ip on pouter network (eg. 10.0.0.1) >> \u001b[0m")
+        eth0_ipv4_addr=input("\u001b[36mstatic ip on pouter network (eg. 10.0.0.1 | 172.16.0.0 | 169.254.0.0 | 192.168.0.0) >> \u001b[0m")
         eth0_ipv4_dhcp_start_addr=input("\u001b[36mdhcp start ip on pouter network (eg. 10.0.0.12) >> \u001b[0m")
         eth0_ipv4_dhcp_end_addr=input("\u001b[36mdhcp end ip on pouter network (eg. 10.0.0.169) >> \u001b[0m")
         paa = getpass("\u001b[31mpi-hole web admin password: >> \u001b[0m")
