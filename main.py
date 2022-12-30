@@ -123,7 +123,7 @@ def runnn_bash(stm, pwd=""):
     cmd = subprocess.run(args)
 
 
-def install_pi_hole(wireless_ipv4_addr, wireless_ipv4_subnet, wired_ipv4_dhcp_start_addr, wired_ipv4_dhcp_end_addr, wired_ipv4_addr,password,wired_interface,wireless_interface):
+def install_pi_hole(wireless_ipv4_addr, wireless_ipv4_subnet, wired_ipv4_dhcp_start_addr, wired_ipv4_dhcp_end_addr, wired_ipv4_addr, password, wired_interface, wireless_interface):
     conf=get_pi_hole_config(wireless_ipv4_addr, wireless_ipv4_subnet, wired_ipv4_dhcp_start_addr, wired_ipv4_dhcp_end_addr, wired_ipv4_addr,"1.1.1.1")
     runnn("rm -rf /etc/pihole/setupVars.conf")
     runnn("mkdir -p /etc/pihole/")
@@ -177,7 +177,7 @@ if __name__ == '__main__':
         wired_ipv4_dhcp_start_addr=input("\u001b[36mdhcp start ip on pouter network (eg. 10.0.0.12) >> \u001b[0m")
         wired_ipv4_dhcp_end_addr=input("\u001b[36mdhcp end ip on pouter network (eg. 10.0.0.169) >> \u001b[0m")
         paa = getpass("\u001b[31mpi-hole web admin password: >> \u001b[0m")
-        install_pi_hole(wireless_ipv4_addr, wireless_ipv4_subnet, wired_ipv4_dhcp_start_addr, wired_ipv4_dhcp_end_addr, wired_ipv4_addr, paa)
+        install_pi_hole(wireless_ipv4_addr, wireless_ipv4_subnet, wired_ipv4_dhcp_start_addr, wired_ipv4_dhcp_end_addr, wired_ipv4_addr, paa, wired_interface, wireless_interface)
         runnn("sudo apt install -y unbound")
         base=wired_ipv4_addr.split(".")
         base[-1]="0"
