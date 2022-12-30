@@ -124,7 +124,7 @@ def runnn_bash(stm, pwd=""):
 
 
 def install_pi_hole(wireless_ipv4_addr, wireless_ipv4_subnet, wired_ipv4_dhcp_start_addr, wired_ipv4_dhcp_end_addr, wired_ipv4_addr, password, wired_interface, wireless_interface):
-    conf=get_pi_hole_config(wireless_ipv4_addr, wireless_ipv4_subnet, wired_ipv4_dhcp_start_addr, wired_ipv4_dhcp_end_addr, wired_ipv4_addr,"1.1.1.1")
+    conf=get_pi_hole_config(wireless_ipv4_addr, wireless_ipv4_subnet, wired_ipv4_dhcp_start_addr, wired_ipv4_dhcp_end_addr, wired_ipv4_addr, wired_interface, wireless_interface,"1.1.1.1")
     runnn("rm -rf /etc/pihole/setupVars.conf")
     runnn("mkdir -p /etc/pihole/")
     with open("/etc/pihole/setupVars.conf","w") as f:
