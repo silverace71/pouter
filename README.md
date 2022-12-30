@@ -12,7 +12,7 @@ If you want to have your own network seperate from your main network (this is gr
 
 ## **INSTALL POUTER**
 ```
-sudo apt-get install -y python3 && sudo curl -sSL https://raw.githubusercontent.com/silverace71/pouter/main/main.py > pouter.py && sudo python3 pouter.py
+curl -sSL https://raw.githubusercontent.com/silverace71/pouter/main/ipy-install.sh
 ```
 ---
 ## **WARNINGS**
