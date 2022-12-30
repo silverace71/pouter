@@ -1,33 +1,39 @@
-# pouter
-If you want to have your own network seperate from your main network (this is great for testing), and you want everything to be connected via ethernet, but you don't have any ethernet ports in your house. This is for you
+# ***pouter***
+If you want to have your own network seperate from your main network (this is great for testing), and you want everything to be connected via ethernet, but you don't have any ethernet ports in your house. This is for you. (think wireless ethernet and you get your own network)
 
 ## **HOW DOES IT WORK?**
-- it installs python3
-- you configure it
+- it installs dependicies
+- you follow along and configure it to your liking
 - pi-hole installs (this blocks ads on the network, and it also acts as a dhcpv4 ip giver. Kinda like your router)
 - unbound installs(your very own dns so that people cannot track you)
-- *magic*
+- *magic* (you get your own network from it)
 - Reboot the system you are using
 ---
-
 ## **INSTALL POUTER**
 ```
-curl -sSL https://raw.githubusercontent.com/silverace71/pouter/main/ipy-install.sh
+wget https://raw.githubusercontent.com/silverace71/pouter/main/ipy-install.sh
+```
+Then Run
+```
+sudo chmod +x ipy-install.sh
+```
+Then Run
+```
+./ipy-install.sh
 ```
 ---
 ## **WARNINGS**
-- DO NOT RUN THIS SCRIPT MORE THAN ONCE!
 - MAKE SURE ```/etc/dhcpcd.conf``` has not been touched before. If you have already configured anything already, please delete anything you added.
-- as of 08/16/22 only wlan0 network is configurable and we are working on a way to fix that.
 ---
 ## ***DEPENDENCIES***
-- a problem
-- an up to date system with apt package manager on it
-- a network switch (optional)
-- python (included with the script)
-- sudo permisions 
-- (temporary) you need to have wlan0 as your wireless id instead of wlp3s0 or anything else
+- a wireless and wired connection
+- apt
+---
+## **USE CASES**
+- wireless ethernet
+- if you hook up a AP (access point) you're able to make you're own wifi (perfect for phones and laptops or computers that are far away)
+- ad blocking
+- privacy
 ---
 ### *CREDIT*
-- silverace_71 - Getting the problem and tidying up stuff
-- ckissane - Actualy doing all of the coding [LINK : https://github.com/ckissane]
+- ckissane - Being good at coding coding [LINK : https://github.com/ckissane]
